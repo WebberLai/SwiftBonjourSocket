@@ -163,13 +163,13 @@
 						DevelopmentTeam = E935HHVHT5;
 						DevelopmentTeamName = "ROCA TAIWAN CO. LTD";
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					60E495D61D2A4AA500F4BE37 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = E935HHVHT5;
 						DevelopmentTeamName = "ROCA TAIWAN CO. LTD";
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 60E495C21D2A4AA500F4BE37;
 					};
 				};
@@ -387,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Swift Bonjour BrowserTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.roca.Swift-Bonjour-BrowserTests";
@@ -400,6 +401,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Swift Bonjour BrowserTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.roca.Swift-Bonjour-BrowserTests";

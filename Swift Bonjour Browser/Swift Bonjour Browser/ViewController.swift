@@ -52,21 +52,33 @@ class ViewController: UIViewController  {
     
     @IBAction func sendMessage(sender:AnyObject!){
         
-        if  (self.outputStream == nil){
+        guard let outputStream = self.outputStream else {
             print("Connection not create yet ! =====> Return")
             return
         }
         
-        let s : String = (self.textfield?.text)!
+        guard let text = textfield?.text,
+            data: NSData = text.data(using: String.Encoding.utf8) else {
+                print("no data")
+                return
+        }
         
-        print("\(self.outputStream) ==> Pass Data : \(s)")
+        print("\(outputStream) ==> Pass Data : \(text)")
+        outputStream.open()
+        defer {
+            print("Output Stream Close")
+            //outputStream.close()
+        }
         
-        let data: NSData = s.data(using: String.Encoding.utf8)!
-        
-        self.outputStream?.open()
-        self.outputStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
-        self.outputStream?.close()
-        //Service no any response or log
+        let result = outputStream.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+        if result == 0 {
+            print("Stream at capacity")
+        } else if result == -1 {
+            print("Operation failed: \(outputStream.streamError)")
+        } else {
+            self.textfield?.text = ""
+            print("The number of bytes written is \(result)")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,8 +122,6 @@ class ViewController: UIViewController  {
             self.inputStream?.open()
             self.outputStream?.open()
         }
-        
-        
     }
     
     func getTheCFStringFromString(originStr : String ) -> CFString{
@@ -120,6 +130,10 @@ class ViewController: UIViewController  {
     }
     
     func getIPV4StringfromAddress(address: [Data] ) -> String{
+        
+        if  address.count == 0{
+            return "0.0.0.0"
+        }
         
         let data = address.first! as NSData
         
@@ -219,9 +233,16 @@ extension ViewController : NetServiceDelegate {
         }
     
         func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: NSOutputStream) {
+            
+            self.receiveTextView?.text = "Accept Connection Success"
+            
             print("netService : \(sender) didAcceptConnectionWith Input Stream : \(inputStream) , Output Stream : \(outputStream)")
             inputStream.delegate = self
             outputStream.delegate = self
+            inputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+            outputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+            inputStream.open()
+            outputStream.open()
         }
 }
 
@@ -239,25 +260,23 @@ extension ViewController : StreamDelegate{
 
             var buffer = [UInt8](repeating:0, count:4096)
             
-            if ( aStream == inputStream){
-                
-                while ((inputStream?.hasBytesAvailable) != false){
-                    let len = inputStream?.read(&buffer, maxLength: buffer.count)
-                    if(len > 0){
-                        let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
-                        if (output != ""){
-                            NSLog("Server Received : %@", output!)
-                            self.receiveTextView?.text = output as String?
-                        }
-                    }else{
-                        //不然會While跑到死
-                        break
+            let inputStream = aStream as? InputStream
+            
+            while ((inputStream?.hasBytesAvailable) != false){
+                let len = inputStream?.read(&buffer, maxLength: buffer.count)
+                if(len > 0){
+                    let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
+                    if (output != ""){
+                        NSLog("Server Received : %@", output!)
+                        self.receiveTextView?.text = output as String?
                     }
+                }else{
+                    //不然會While跑到死
+                    break
                 }
             }
-            
             break
-            
+        
         case Stream.Event.errorOccurred:
             NSLog("ErrorOccurred")
             break
