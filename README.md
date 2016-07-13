@@ -1,9 +1,9 @@
 # SwiftBonjourSocket
 
-This is a simple Bonjour project , Using Swift 3 and XCode 8.0 Beta 
+This is a simple Bonjour project , Using Swift 3 on XCode 8.0 Beta 
 
 You can publish a server and scan a server 
 
-And create input/output stream sockect
+Also create input/output stream sockect between devices
 
-But can't send output stream to service yet ...
+Than send message to each other .
