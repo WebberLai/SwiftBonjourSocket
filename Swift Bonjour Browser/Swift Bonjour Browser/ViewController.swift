@@ -14,10 +14,9 @@ class ViewController: UIViewController  {
     @IBOutlet weak var textfield : UITextField?
     @IBOutlet weak var sendMsgBtn: UIButton?
     @IBOutlet weak var receiveTextView : UITextView?
-    
-    var inputStream : InputStream?
-    var outputStream : NSOutputStream?
-    
+
+    let socket : Socket? = Socket()
+
     //NetService Browser
     var netServiceBrowser : NetServiceBrowser!
     var services     = [NetService]()
@@ -52,7 +51,7 @@ class ViewController: UIViewController  {
     
     @IBAction func sendMessage(sender:AnyObject!){
         
-        guard let outputStream = self.outputStream else {
+        guard let outputStream = socket?.getOutputStream() else {
             print("Connection not create yet ! =====> Return")
             return
         }
@@ -99,29 +98,10 @@ class ViewController: UIViewController  {
     }
 
     
-    func initSockerCommunication( host:CFString , port : UInt32 ){
-        
-        print("HOST \(host) and the port : \(port)" )
-        
-        DispatchQueue.main.async {
-            var readstream : Unmanaged<CFReadStream>?
-            
-            var writestream : Unmanaged<CFWriteStream>?
-            
-            CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, host, port, &readstream, &writestream)
-            
-            self.inputStream = readstream!.takeRetainedValue()
-            self.outputStream = writestream!.takeRetainedValue()
-            
-            self.inputStream?.delegate = self
-            self.outputStream?.delegate = self
-            
-            self.inputStream?.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
-            self.outputStream?.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
-            
-            self.inputStream?.open()
-            self.outputStream?.open()
-        }
+    func initSocket( ipString :CFString , port : UInt32 ){
+        socket?.initSockerCommunication(host: ipString, port: port)
+        print("HOST \(ipString) and the port : \(port)" )
+        socket?.setStreamDelegate(delegete: self)
     }
     
     func getTheCFStringFromString(originStr : String ) -> CFString{
@@ -239,8 +219,8 @@ extension ViewController : NetServiceDelegate {
             print("netService : \(sender) didAcceptConnectionWith Input Stream : \(inputStream) , Output Stream : \(outputStream)")
             inputStream.delegate = self
             outputStream.delegate = self
-            inputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
-            outputStream.schedule(in: RunLoop.main(), forMode: RunLoopMode.defaultRunLoopMode)
+            inputStream.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
+            outputStream.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
             inputStream.open()
             outputStream.open()
         }
@@ -295,7 +275,7 @@ extension ViewController : UITableViewDelegate {
         
         let serv = services[indexPath.row] as NetService
         
-        self.initSockerCommunication(host: self.getIPV4StringfromAddress(address: serv.addresses!) as CFString , port: UInt32(serv.port))
+        self.initSocket(ipString: self.getIPV4StringfromAddress(address: serv.addresses!) as CFString , port: UInt32(serv.port))
         
     }
 }

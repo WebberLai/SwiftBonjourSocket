@@ -14,6 +14,7 @@
 		60E495CE1D2A4AA500F4BE37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60E495CD1D2A4AA500F4BE37 /* Assets.xcassets */; };
 		60E495D11D2A4AA500F4BE37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60E495CF1D2A4AA500F4BE37 /* LaunchScreen.storyboard */; };
 		60E495DC1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E495DB1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift */; };
+		60EE9D9B1D37168600B14EFB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EE9D9A1D37168600B14EFB /* Socket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		60E495D71D2A4AA500F4BE37 /* Swift Bonjour BrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Bonjour BrowserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60E495DB1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Bonjour_BrowserTests.swift; sourceTree = "<group>"; };
 		60E495DD1D2A4AA500F4BE37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60EE9D9A1D37168600B14EFB /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				60E495C61D2A4AA500F4BE37 /* AppDelegate.swift */,
 				60E495C81D2A4AA500F4BE37 /* ViewController.swift */,
+				60EE9D9A1D37168600B14EFB /* Socket.swift */,
 				60E495CA1D2A4AA500F4BE37 /* Main.storyboard */,
 				60E495CD1D2A4AA500F4BE37 /* Assets.xcassets */,
 				60E495CF1D2A4AA500F4BE37 /* LaunchScreen.storyboard */,
@@ -220,6 +223,7 @@
 			files = (
 				60E495C91D2A4AA500F4BE37 /* ViewController.swift in Sources */,
 				60E495C71D2A4AA500F4BE37 /* AppDelegate.swift in Sources */,
+				60EE9D9B1D37168600B14EFB /* Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
