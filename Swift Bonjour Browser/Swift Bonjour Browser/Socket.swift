@@ -66,24 +66,20 @@ extension Socket : StreamDelegate{
             
         case Stream.Event.openCompleted:
             self.status = SocketState.Connect.rawValue
-            NSLog("Stream opened")
             break
             
         case Stream.Event.hasBytesAvailable:
-            NSLog("HasBytesAvailable")
             break
             
         case Stream.Event.errorOccurred:
-            NSLog("ErrorOccurred")
             break
             
         case Stream.Event.endEncountered:
             self.status = SocketState.ErrorOccurred.rawValue
-            NSLog("EndEncountered")
             break
             
         default:
-            NSLog("unknown.")
+            print("")
         }
         mStreamDelegate?.stream?(aStream, handle: eventCode)
     }

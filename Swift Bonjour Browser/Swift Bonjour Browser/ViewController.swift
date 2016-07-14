@@ -80,6 +80,58 @@ class ViewController: UIViewController  {
         }
     }
     
+    @IBAction func sendJSONData(sender:AnyObject!){
+        guard let outputStream = socket?.getOutputStream() else {
+            print("Connection not create yet ! =====> Return")
+            return
+        }
+        
+        let dict : [String:AnyObject] = ["key1":"value1", "key2":"value2", "key3":["a","b","c"], "key4":0]
+        
+        do {
+            
+            let commandDict : [String : String  ] = ["Command" : "Send Command 1"]
+            let dataDict    : [String : AnyObject] = ["Data" : dict]
+            let temp = NSMutableDictionary(dictionary: dataDict)
+            temp.addEntries(from: commandDict);
+            
+            
+            let jsonData = try JSONSerialization.data(withJSONObject: temp, options: .prettyPrinted)
+
+            let data = jsonData as NSData?
+            
+            print("\(outputStream) ==> Pass JSON Data : \(temp)")
+            
+            outputStream.open()
+            defer {
+                print("Output Stream Close")
+                //outputStream.close()
+            }
+            
+            let result = outputStream.write(UnsafePointer<UInt8>((data?.bytes)!), maxLength: (data?.length)!)
+                        
+            if result == 0 {
+                print("Stream at capacity")
+            } else if result == -1 {
+                print("Operation failed: \(outputStream.streamError)")
+            } else {
+                print("The number of bytes written is \(result)")
+            }
+            
+            // here "jsonData" is the dictionary encoded in JSON data
+            
+            //let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
+            // here "decoded" is an `AnyObject` decoded from JSON data
+            
+            // you can now cast it with the right type
+            //if let dictFromJSON = decoded as? [String:String] {
+                // use dictFromJSON
+            //}
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
