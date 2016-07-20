@@ -26,7 +26,8 @@ class Socket: NSObject {
     weak var mStreamDelegate:StreamDelegate?
 
     func initSockerCommunication( host:CFString , port : UInt32 ){
-        DispatchQueue.main.async {
+        
+        DispatchQueue.global(attributes: .qosBackground).async {
             
             var readstream : Unmanaged<CFReadStream>?
             var writestream : Unmanaged<CFWriteStream>?
@@ -39,8 +40,8 @@ class Socket: NSObject {
             self.inputStream?.delegate = self
             self.outputStream?.delegate = self
             
-            self.inputStream?.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
-            self.outputStream?.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
+            self.inputStream?.schedule(in: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+            self.outputStream?.schedule(in: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
             
             self.inputStream?.open()
             self.outputStream?.open()

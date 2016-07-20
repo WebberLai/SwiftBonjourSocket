@@ -40,8 +40,8 @@ class ViewController: UIViewController  {
     @IBAction func publishService(sender:AnyObject!){
         print("Start Publish Service")
         self.netService.delegate = self
-        self.netService.schedule(in: RunLoop.current(), forMode: RunLoopMode.commonModes)
-        self.netService.publish(NetService.Options.listenForConnections)
+        self.netService.schedule(in: RunLoop.current, forMode: RunLoopMode.commonModes)
+        self.netService.publish(options: NetService.Options.listenForConnections)
     }
     
     @IBAction func stopService(sender:AnyObject!){
@@ -57,7 +57,7 @@ class ViewController: UIViewController  {
         }
         
         guard let text = textfield?.text,
-            data: NSData = text.data(using: String.Encoding.utf8) else {
+           let data: NSData = text.data(using: String.Encoding.utf8) else {
                 print("no data")
                 return
         }
@@ -118,6 +118,31 @@ class ViewController: UIViewController  {
                 print("The number of bytes written is \(result)")
             }
             
+//            let length = data?.length
+//            let chunkSize = 50      // 拆成50一包
+//            var offset = 0
+//            
+//            repeat {
+//                // get the length of the chunk
+//                let thisChunkSize = ((length! - offset) > chunkSize) ? chunkSize : (length! - offset);
+//                
+//                // get the chunk
+//                let chunk = (data?.subdata(with: NSMakeRange(offset, thisChunkSize)))! as NSData
+//
+//                let result = outputStream.write(UnsafePointer<UInt8>((chunk.bytes)), maxLength: (chunk.length))
+//                
+//                if result == 0 {
+//                    print("Stream at capacity")
+//                } else if result == -1 {
+//                    print("Operation failed: \(outputStream.streamError)")
+//                } else {
+//                    print("The number of bytes written is \(result)")
+//                }
+//                
+//                offset += thisChunkSize;
+//                
+//            } while (offset < length);
+
             // here "jsonData" is the dictionary encoded in JSON data
             
             //let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
@@ -271,8 +296,8 @@ extension ViewController : NetServiceDelegate {
             print("netService : \(sender) didAcceptConnectionWith Input Stream : \(inputStream) , Output Stream : \(outputStream)")
             inputStream.delegate = self
             outputStream.delegate = self
-            inputStream.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
-            outputStream.schedule(in: RunLoop.current(), forMode: RunLoopMode.defaultRunLoopMode)
+            inputStream.schedule(in: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+            outputStream.schedule(in: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
             inputStream.open()
             outputStream.open()
         }
