@@ -13,19 +13,8 @@
 		60E495CC1D2A4AA500F4BE37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60E495CA1D2A4AA500F4BE37 /* Main.storyboard */; };
 		60E495CE1D2A4AA500F4BE37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60E495CD1D2A4AA500F4BE37 /* Assets.xcassets */; };
 		60E495D11D2A4AA500F4BE37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60E495CF1D2A4AA500F4BE37 /* LaunchScreen.storyboard */; };
-		60E495DC1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E495DB1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift */; };
 		60EE9D9B1D37168600B14EFB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EE9D9A1D37168600B14EFB /* Socket.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		60E495D81D2A4AA500F4BE37 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 60E495BB1D2A4AA500F4BE37 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 60E495C21D2A4AA500F4BE37;
-			remoteInfo = "Swift Bonjour Browser";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		60B071021D2B663300FABA19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -37,7 +26,6 @@
 		60E495CD1D2A4AA500F4BE37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60E495D01D2A4AA500F4BE37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60E495D21D2A4AA500F4BE37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60E495D71D2A4AA500F4BE37 /* Swift Bonjour BrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift Bonjour BrowserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60E495DB1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_Bonjour_BrowserTests.swift; sourceTree = "<group>"; };
 		60E495DD1D2A4AA500F4BE37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60EE9D9A1D37168600B14EFB /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
@@ -49,13 +37,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				60B071031D2B663300FABA19 /* CFNetwork.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		60E495D41D2A4AA500F4BE37 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				60E495C31D2A4AA500F4BE37 /* Swift Bonjour Browser.app */,
-				60E495D71D2A4AA500F4BE37 /* Swift Bonjour BrowserTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,24 +113,6 @@
 			productReference = 60E495C31D2A4AA500F4BE37 /* Swift Bonjour Browser.app */;
 			productType = "com.apple.product-type.application";
 		};
-		60E495D61D2A4AA500F4BE37 /* Swift Bonjour BrowserTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 60E495E31D2A4AA500F4BE37 /* Build configuration list for PBXNativeTarget "Swift Bonjour BrowserTests" */;
-			buildPhases = (
-				60E495D31D2A4AA500F4BE37 /* Sources */,
-				60E495D41D2A4AA500F4BE37 /* Frameworks */,
-				60E495D51D2A4AA500F4BE37 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				60E495D91D2A4AA500F4BE37 /* PBXTargetDependency */,
-			);
-			name = "Swift Bonjour BrowserTests";
-			productName = "Swift Bonjour BrowserTests";
-			productReference = 60E495D71D2A4AA500F4BE37 /* Swift Bonjour BrowserTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,13 +130,6 @@
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
-					60E495D61D2A4AA500F4BE37 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = E935HHVHT5;
-						DevelopmentTeamName = "ROCA TAIWAN CO. LTD";
-						ProvisioningStyle = Automatic;
-						TestTargetID = 60E495C21D2A4AA500F4BE37;
-					};
 				};
 			};
 			buildConfigurationList = 60E495BE1D2A4AA500F4BE37 /* Build configuration list for PBXProject "Swift Bonjour Browser" */;
@@ -191,7 +146,6 @@
 			projectRoot = "";
 			targets = (
 				60E495C21D2A4AA500F4BE37 /* Swift Bonjour Browser */,
-				60E495D61D2A4AA500F4BE37 /* Swift Bonjour BrowserTests */,
 			);
 		};
 /* End PBXProject section */
@@ -204,13 +158,6 @@
 				60E495D11D2A4AA500F4BE37 /* LaunchScreen.storyboard in Resources */,
 				60E495CE1D2A4AA500F4BE37 /* Assets.xcassets in Resources */,
 				60E495CC1D2A4AA500F4BE37 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		60E495D51D2A4AA500F4BE37 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,23 +174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		60E495D31D2A4AA500F4BE37 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				60E495DC1D2A4AA500F4BE37 /* Swift_Bonjour_BrowserTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		60E495D91D2A4AA500F4BE37 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 60E495C21D2A4AA500F4BE37 /* Swift Bonjour Browser */;
-			targetProxy = 60E495D81D2A4AA500F4BE37 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		60E495CA1D2A4AA500F4BE37 /* Main.storyboard */ = {
@@ -387,34 +318,6 @@
 			};
 			name = Release;
 		};
-		60E495E41D2A4AA500F4BE37 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "Swift Bonjour BrowserTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.roca.Swift-Bonjour-BrowserTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swift Bonjour Browser.app/Swift Bonjour Browser";
-			};
-			name = Debug;
-		};
-		60E495E51D2A4AA500F4BE37 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "Swift Bonjour BrowserTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.roca.Swift-Bonjour-BrowserTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swift Bonjour Browser.app/Swift Bonjour Browser";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -432,15 +335,6 @@
 			buildConfigurations = (
 				60E495E11D2A4AA500F4BE37 /* Debug */,
 				60E495E21D2A4AA500F4BE37 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		60E495E31D2A4AA500F4BE37 /* Build configuration list for PBXNativeTarget "Swift Bonjour BrowserTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				60E495E41D2A4AA500F4BE37 /* Debug */,
-				60E495E51D2A4AA500F4BE37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

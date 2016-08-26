@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7FEF81C521AB036722F458153795B80D27A1C8FC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F2E32EF01FA7E88218C1271D5D658A77E5936C4A" : 0,
+    "7FEF81C521AB036722F458153795B80D27A1C8FC" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8D4ACD4E-7B1B-42C8-A013-F4352CD0C74A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F2E32EF01FA7E88218C1271D5D658A77E5936C4A" : "",
+    "7FEF81C521AB036722F458153795B80D27A1C8FC" : "SwiftBonjourSocket\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SwiftBonjourBrowser",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Swift Bonjour Browser\/SwiftBonjourBrowser.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/WebberLai\/SwiftBonjourSocket.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7FEF81C521AB036722F458153795B80D27A1C8FC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mobile-web-messaging\/MQTTKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2E32EF01FA7E88218C1271D5D658A77E5936C4A"
+    }
+  ]
+}

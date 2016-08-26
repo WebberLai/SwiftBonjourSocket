@@ -22,34 +22,34 @@ class ViewController: UIViewController  {
     var services     = [NetService]()
     
     /// Netservice
-    let netService : NetService = NetService.init(domain: "local", type: "_myApp._tcp.", name: UIDevice.current().name,  port: Int32(54321))
+    let netService : NetService = NetService.init(domain: "local", type: "_myApp._tcp.", name: UIDevice.current.name,  port: Int32(54321))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textfield?.delegate = self
     }
     
-    @IBAction func scanDevice(sender:AnyObject!){
+    @IBAction func scanDevice(_ sender:AnyObject!){
         print("Start Scan Device")
         self.services.removeAll()
         self.netServiceBrowser = NetServiceBrowser()
         self.netServiceBrowser.delegate = self
-        self.netServiceBrowser.searchForServices(ofType: "_myApp._tcp", inDomain: "")
+        self.netServiceBrowser.searchForServices(ofType: "_myApp._tcp.", inDomain: "local")
     }
     
-    @IBAction func publishService(sender:AnyObject!){
+    @IBAction func publishService(_ sender:AnyObject!){
         print("Start Publish Service")
         self.netService.delegate = self
         self.netService.schedule(in: RunLoop.current, forMode: RunLoopMode.commonModes)
         self.netService.publish(options: NetService.Options.listenForConnections)
     }
     
-    @IBAction func stopService(sender:AnyObject!){
+    @IBAction func stopService(_ sender:AnyObject!){
         print("Stop Service")
         self.netService.stop()
     }
     
-    @IBAction func sendMessage(sender:AnyObject!){
+    @IBAction func sendMessage(_ sender:AnyObject!){
         
         guard let outputStream = socket?.getOutputStream() else {
             print("Connection not create yet ! =====> Return")
@@ -57,7 +57,7 @@ class ViewController: UIViewController  {
         }
         
         guard let text = textfield?.text,
-           let data: NSData = text.data(using: String.Encoding.utf8) else {
+           let data: Data = text.data(using: String.Encoding.utf8) else {
                 print("no data")
                 return
         }
@@ -68,8 +68,11 @@ class ViewController: UIViewController  {
             print("Output Stream Close")
             //outputStream.close()
         }
+
+//        let result = outputStream.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
         
-        let result = outputStream.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+        let result = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
+        
         if result == 0 {
             print("Stream at capacity")
         } else if result == -1 {
@@ -80,25 +83,26 @@ class ViewController: UIViewController  {
         }
     }
     
-    @IBAction func sendJSONData(sender:AnyObject!){
+    @IBAction func sendJSONData(_ sender:AnyObject!){
+       
         guard let outputStream = socket?.getOutputStream() else {
             print("Connection not create yet ! =====> Return")
             return
         }
         
-        let dict : [String:AnyObject] = ["key1":"value1", "key2":"value2", "key3":["a","b","c"], "key4":0]
+        let dict : [String:AnyObject] = ["key1":"value1" as AnyObject, "key2":"value2" as AnyObject, "key3":["a","b","c"] as AnyObject, "key4":0 as AnyObject]
         
         do {
             
             let commandDict : [String : String  ] = ["Command" : "Send Command 1"]
-            let dataDict    : [String : AnyObject] = ["Data" : dict]
+            let dataDict    : [String : AnyObject] = ["Data" : dict as AnyObject]
             let temp = NSMutableDictionary(dictionary: dataDict)
             temp.addEntries(from: commandDict);
             
             
             let jsonData = try JSONSerialization.data(withJSONObject: temp, options: .prettyPrinted)
 
-            let data = jsonData as NSData?
+            let data = jsonData as Data?
             
             print("\(outputStream) ==> Pass JSON Data : \(temp)")
             
@@ -108,8 +112,8 @@ class ViewController: UIViewController  {
                 //outputStream.close()
             }
             
-            let result = outputStream.write(UnsafePointer<UInt8>((data?.bytes)!), maxLength: (data?.length)!)
-                        
+            let result = data?.withUnsafeBytes { outputStream.write($0, maxLength: (data?.count)!) }
+            
             if result == 0 {
                 print("Stream at capacity")
             } else if result == -1 {
@@ -175,18 +179,18 @@ class ViewController: UIViewController  {
     }
 
     
-    func initSocket( ipString :CFString , port : UInt32 ){
-        socket?.initSockerCommunication(host: ipString, port: port)
+    func initSocket( _ ipString :CFString , port : UInt32 ){
+        socket?.initSockerCommunication(ipString, port: port)
         print("HOST \(ipString) and the port : \(port)" )
-        socket?.setStreamDelegate(delegete: self)
+        socket?.setStreamDelegate(self)
     }
     
-    func getTheCFStringFromString(originStr : String ) -> CFString{
+    func getTheCFStringFromString(_ originStr : String ) -> CFString{
         let str = originStr as CFString
         return str
     }
     
-    func getIPV4StringfromAddress(address: [Data] ) -> String{
+    func getIPV4StringfromAddress(_ address: [Data] ) -> String{
         
         if  address.count == 0{
             return "0.0.0.0"
@@ -289,7 +293,7 @@ extension ViewController : NetServiceDelegate {
             print("netServiceDidStop : \(sender)")
         }
     
-        func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: NSOutputStream) {
+        func netService(_ sender: NetService, didAcceptConnectionWith inputStream: InputStream, outputStream: OutputStream) {
             
             self.receiveTextView?.text = "Accept Connection Success"
             
@@ -321,7 +325,7 @@ extension ViewController : StreamDelegate{
             
             while ((inputStream?.hasBytesAvailable) != false){
                 let len = inputStream?.read(&buffer, maxLength: buffer.count)
-                if(len > 0){
+                if(len! > 0){
                     let output = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
                     if (output != ""){
                         NSLog("Server Received : %@", output!)
@@ -352,7 +356,7 @@ extension ViewController : UITableViewDelegate {
         
         let serv = services[indexPath.row] as NetService
         
-        self.initSocket(ipString: self.getIPV4StringfromAddress(address: serv.addresses!) as CFString , port: UInt32(serv.port))
+        self.initSocket(self.getIPV4StringfromAddress(serv.addresses!) as CFString , port: UInt32(serv.port))
         
     }
 }
@@ -366,7 +370,7 @@ extension ViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let service = services[indexPath.row]
         cell.textLabel?.text = service.name
-        cell.detailTextLabel?.text = self.getIPV4StringfromAddress(address: service.addresses!)
+        cell.detailTextLabel?.text = self.getIPV4StringfromAddress(service.addresses!)
         return cell
     }
     

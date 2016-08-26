@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Swift Bonjour Browser.xcodeproj">
+      location = "self:/Users/rocadeveloper/Documents/GitHub/SwiftBonjourSocket/Swift Bonjour Browser/Swift Bonjour Browser.xcodeproj">
    </FileRef>
 </Workspace>
